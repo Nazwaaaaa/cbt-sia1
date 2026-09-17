@@ -21,8 +21,9 @@ class Exam extends Model
     ];
 
     // relasi many to many dengan model subject
-    public function subjects(): BelongsToMany
+    public function subjects(): BelongsToMany //method belongstomany hanya mengenal foreign key
     {
-        return $this->belongsToMany(Subject::class);
+        return $this->belongsToMany(Subject::class)
+            ->withPivot('qty'); //kalau ada tambahan bisa ('qty', '...')
     }
 }

@@ -26,6 +26,7 @@ class Subject extends Model
     // relasi many to many dengan model exam
     public function exams(): BelongsToMany
     {
-        return $this->belongsToMany(Exam::class);
+        return $this->belongsToMany(Exam::class)
+            ->withPivot('qty');
     }
 }
