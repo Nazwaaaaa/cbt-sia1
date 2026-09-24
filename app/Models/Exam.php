@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Exam extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes; 
+
     protected $guarded = [];
 
     protected $casts = [
@@ -20,10 +21,16 @@ class Exam extends Model
         'is_available' => 'boolean',
     ];
 
-    // relasi many to many dengan model subject
-    public function subjects(): BelongsToMany //method belongstomany hanya mengenal foreign key
+    // relasi many - to - many dengan model subject
+    public function subjects():BelongsToMany
     {
         return $this->belongsToMany(Subject::class)
-            ->withPivot('qty'); //kalau ada tambahan bisa ('qty', '...')
+            ->withPivot('qty');
+    }
+
+    // relasi ke model
+    public function examResults()
+    {
+        return $this->hasMany(ExamResult::class);
     }
 }

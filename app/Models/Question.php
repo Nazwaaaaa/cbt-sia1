@@ -2,30 +2,36 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Question extends Model
 {
-    //trait
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
     protected $casts = ['is_active' => 'boolean'];
 
-    // relasi inverse ke model subject
-    public function subject() : BelongsTo
+    // relasi inverse ke model subject 
+    public function subject(): BelongsTo
     {
+
         return $this->belongsTo(Subject::class);
     }
 
-    //relasi one to many dengan answer
-    public function answers() : HasMany
+    // relasi 1 to many dengan model Answer
+    public function answers(): HasMany
     {
         return $this->hasMany(Answer::class);
+    }
+
+    // relasi ke model
+    public function examResultAnswers()
+    {
+        return $this->hasMany(ExamResultAnswer::class);
     }
 }

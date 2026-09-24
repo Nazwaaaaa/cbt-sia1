@@ -12,7 +12,7 @@ class Student extends Model
 {
     use SoftDeletes;
     protected $guarded = [];
-    
+
     #[Override]
     protected function casts()
     {
@@ -22,9 +22,15 @@ class Student extends Model
         ];
     }
 
-    // relasi antar tabel
+    // relasi antar tabel users
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    // relasi ke model
+    public function examResults()
+    {
+        return $this->hasMany(ExamResult::class);
     }
 }

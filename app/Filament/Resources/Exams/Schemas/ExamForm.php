@@ -24,30 +24,35 @@ class ExamForm
                             ->label('Jenis Ujian')
                             ->required()
                             ->placeholder('Contoh: Ujian Tengah Semester'),
+
                         TextInput::make('duration')
                             ->label('Durasi Ujian')
                             ->required()
                             ->numeric(),
+
                         TextInput::make('threshold')
                             ->label('Batas Nilai')
                             ->required()
                             ->numeric()
                             ->default(50.0),
+
                         Toggle::make('exact_time')
                             ->label('Waktu Ujian')
                             ->live()
                             ->required(),
+
+                        // WAKTU MULAI TETAP SEPERTI SEBELUMNYA
                         DateTimePicker::make('started_at')
                             ->label('Waktu Mulai')
                             ->required(),
+
+                        // HANYA BAGIAN INI YANG DIUBAH
                         DateTimePicker::make('expired_at')
                             ->label('Waktu Berakhir')
                             ->seconds(false)
                             ->native(false)
-                            ->displayFormat('d F Y, H:i')
-                            ->hidden(fn (Get $get): bool =>
-                                $get('exact_time')
-                            ),
+                            ->displayFormat('d F Y, H:i'),
+
                         Toggle::make('is_available')
                             ->required(),
                     ]),
